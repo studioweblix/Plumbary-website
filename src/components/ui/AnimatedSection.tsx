@@ -50,7 +50,7 @@ export function AnimatedSection({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration, delay, ease: "easeOut" }}
+      transition={{ duration, delay, ease: "easeOut" as const }}
       className={className}
     >
       {children}
