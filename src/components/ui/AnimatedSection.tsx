@@ -3,54 +3,77 @@
 import { type ReactNode } from "react";
 import { motion, type Variants } from "framer-motion";
 
-const animations = {
+// ── Static motion-component map ─────────────────────────────────────────────
+// IMPORTANT: must live outside any render function so React never sees a
+// "new" component type between renders (avoids unmount/remount lag).
+const M = {
+  div:     motion.div,
+  section: motion.section,
+  article: motion.article,
+  li:      motion.li,
+  span:    motion.span,
+  ul:      motion.ul,
+  ol:      motion.ol,
+} as const;
+
+// ── Viewport config shared by all instances ──────────────────────────────────
+// margin: start animation 80 px before element enters viewport → no visible
+// "snap into place" lag. once: true so the observer disconnects after firing.
+const VIEWPORT = { once: true, margin: "-80px 0px" } as const;
+
+// ── Variants ──────────────────────────────────────────────────────────────────
+const variants: Record<string, Variants> = {
   fadeIn: {
-    hidden: { opacity: 0 },
+    hidden:  { opacity: 0 },
     visible: { opacity: 1 },
   },
   slideUp: {
-    hidden: { opacity: 0, y: 40 },
+    hidden:  { opacity: 0, y: 32 },
     visible: { opacity: 1, y: 0 },
   },
   slideLeft: {
-    hidden: { opacity: 0, x: 60 },
+    hidden:  { opacity: 0, x: 48 },
     visible: { opacity: 1, x: 0 },
   },
   slideRight: {
-    hidden: { opacity: 0, x: -60 },
+    hidden:  { opacity: 0, x: -48 },
     visible: { opacity: 1, x: 0 },
   },
-} satisfies Record<string, Variants>;
+};
 
-type Animation = keyof typeof animations;
-
+// ── AnimatedSection ───────────────────────────────────────────────────────────
 interface AnimatedSectionProps {
   children: ReactNode;
-  animation?: Animation;
-  duration?: number;
-  delay?: number;
+  animation?: keyof typeof variants;
+  duration?:  number;
+  delay?:     number;
   className?: string;
-  as?: "div" | "section" | "article" | "li" | "span";
+  as?: keyof typeof M;
 }
 
 export function AnimatedSection({
   children,
   animation = "slideUp",
-  duration = 0.6,
-  delay = 0,
+  duration  = 0.55,
+  delay     = 0,
   className,
-  as = "div",
+  as        = "div",
 }: AnimatedSectionProps) {
-  const Component = motion.create(as);
-  const variants = animations[animation];
+  const Component = M[as];
 
   return (
     <Component
-      variants={variants}
+      variants={variants[animation]}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration, delay, ease: "easeOut" as const }}
+      viewport={VIEWPORT}
+      transition={{
+        duration,
+        delay,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      // GPU-composite hint so the browser doesn't repaint during the animation
+      style={{ willChange: "opacity, transform" }}
       className={className}
     >
       {children}
@@ -58,17 +81,40 @@ export function AnimatedSection({
   );
 }
 
-const staggerContainer: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
+// ── AnimatedItem ─────────────────────────────────────────────────────────────
+// Use INSIDE an AnimatedStagger. Has no own whileInView observer — it inherits
+// the parent stagger's trigger. This avoids N+1 observer explosion.
+interface AnimatedItemProps {
+  children:   ReactNode;
+  className?: string;
+  as?: keyof typeof M;
+}
+
+export function AnimatedItem({
+  children,
+  className,
+  as = "div",
+}: AnimatedItemProps) {
+  const Component = M[as];
+  return (
+    <Component
+      variants={variants.slideUp}
+      style={{ willChange: "opacity, transform" }}
+      className={className}
+    >
+      {children}
+    </Component>
+  );
+}
+
+// ── AnimatedStagger ───────────────────────────────────────────────────────────
+const staggerVariants: Variants = {
+  hidden:  {},
+  visible: { transition: { staggerChildren: 0.08 } },
 };
 
 interface AnimatedStaggerProps {
-  children: ReactNode;
+  children:   ReactNode;
   className?: string;
   as?: "div" | "section" | "ul" | "ol";
 }
@@ -78,14 +124,14 @@ export function AnimatedStagger({
   className,
   as = "div",
 }: AnimatedStaggerProps) {
-  const Component = motion.create(as);
+  const Component = M[as];
 
   return (
     <Component
-      variants={staggerContainer}
+      variants={staggerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={VIEWPORT}
       className={className}
     >
       {children}

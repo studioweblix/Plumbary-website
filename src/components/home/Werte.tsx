@@ -1,4 +1,4 @@
-import { AnimatedSection, AnimatedStagger } from "@/components/ui/AnimatedSection";
+import { AnimatedSection, AnimatedItem, AnimatedStagger } from "@/components/ui/AnimatedSection";
 
 function ShieldIcon() {
   return (
@@ -98,11 +98,9 @@ export function Werte() {
 
         {/* Cards */}
         <AnimatedStagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {werte.map((wert, i) => (
-            <AnimatedSection
+          {werte.map((wert) => (
+            <AnimatedItem
               key={wert.title}
-              animation="slideUp"
-              delay={i * 0.08}
               className="relative group border border-white/[0.06] bg-[var(--color-dark-card)]/60 p-7 hover:border-[var(--color-secondary)]/25 transition-all duration-400"
             >
               {/* Number watermark */}
@@ -125,7 +123,7 @@ export function Werte() {
 
               {/* Bottom accent */}
               <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--color-secondary)]/0 to-transparent group-hover:via-[var(--color-secondary)]/30 transition-all duration-500" />
-            </AnimatedSection>
+            </AnimatedItem>
           ))}
         </AnimatedStagger>
       </div>

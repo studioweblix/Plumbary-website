@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import {
   AnimatedSection,
+  AnimatedItem,
   AnimatedStagger,
 } from "@/components/ui/AnimatedSection";
 
@@ -114,11 +115,9 @@ export function Bereiche() {
 
         {/* Cards */}
         <AnimatedStagger className="grid gap-5 lg:grid-cols-2">
-          {bereiche.map((bereich, i) => (
-            <AnimatedSection
+          {bereiche.map((bereich) => (
+            <AnimatedItem
               key={bereich.id}
-              animation="slideUp"
-              delay={i * 0.12}
               className="group relative overflow-hidden border border-white/[0.07] bg-[var(--color-dark-card)] transition-all duration-500 hover:border-[var(--color-secondary)]/30"
             >
               {/* Top line accent on hover */}
@@ -180,7 +179,7 @@ export function Bereiche() {
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1 duration-300" />
                 </Link>
               </div>
-            </AnimatedSection>
+            </AnimatedItem>
           ))}
         </AnimatedStagger>
       </div>
