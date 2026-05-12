@@ -2,24 +2,24 @@ import { AnimatedItem, AnimatedStagger } from "@/components/ui/AnimatedSection";
 
 const stats = [
   {
-    value: "30+",
-    label: "Jahre Erfahrung",
-    description: "Gegründet auf jahrzehntelanger Expertise in der Bleiverarbeitung",
+    value: "B2B",
+    label: "Produktionsbetrieb",
+    description: "Auf industrielle Beschaffung, Qualitätssicherung und technische Anfragen ausgerichtet",
   },
   {
     value: "2",
-    label: "Produktbereiche",
-    description: "Medizinische und industrielle Lösungen aus einer Hand",
+    label: "Getrennte Portfolios",
+    description: "Medizinische und industrielle Produkte werden klar getrennt dargestellt",
   },
   {
-    value: "100%",
-    label: "Made in Germany",
-    description: "Produktion und Qualitätskontrolle am Standort Deutschland",
+    value: "ISO",
+    label: "Zertifikate",
+    description: "Bereich für Normen, Nachweise und Qualitätsdokumente ist vorbereitet",
   },
   {
-    value: "Int.",
-    label: "Lieferfähigkeit",
-    description: "Zuverlässige Belieferung nationaler und internationaler Kunden",
+    value: "Pb",
+    label: "Werkstoffkompetenz",
+    description: "Fokus auf Blei als Werkstoff: Guss, Halbzeuge, Abschirmung und Sonderteile",
   },
 ];
 

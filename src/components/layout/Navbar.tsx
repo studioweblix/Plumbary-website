@@ -8,9 +8,10 @@ import { Menu, X, ArrowUpRight } from "lucide-react";
 import { PlumbaryLogo } from "@/components/ui/PlumbaryLogo";
 
 const navLinks = [
-  { href: "/ueber-uns", label: "Über uns" },
-  { href: "/produkte", label: "Produkte" },
-  { href: "/kontakt", label: "Kontakt" },
+  { href: "/produkte#medizin", label: "Medizinische Produkte" },
+  { href: "/produkte#industrie", label: "Industrielle Produkte" },
+  { href: "/#zertifikate", label: "Zertifikate" },
+  { href: "/ueber-uns", label: "Unternehmen" },
 ];
 
 export function Navbar() {
@@ -50,7 +51,9 @@ export function Navbar() {
           {/* Desktop Nav */}
           <ul className="hidden lg:flex items-center gap-10">
             {navLinks.map(({ href, label }) => {
-              const isActive = pathname === href || pathname.startsWith(href + "/");
+              const isActive =
+                !href.includes("#") &&
+                (pathname === href || pathname.startsWith(href + "/"));
               return (
                 <li key={label}>
                   <Link

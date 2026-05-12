@@ -1,7 +1,15 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+
+const capabilities = [
+  "Bleiguss & Formteile",
+  "Blech-, Rohr- und Profilhalbzeuge",
+  "Strahlenschutz-Komponenten",
+  "Sonderfertigung nach Zeichnung",
+  "Dokumentierte Qualitätsprüfung",
+  "Projektbezogene Beratung",
+];
 
 export function UeberUnsSnippet() {
   return (
@@ -14,7 +22,7 @@ export function UeberUnsSnippet() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-14 lg:grid-cols-2 lg:gap-20 items-center">
+        <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 items-center">
           {/* Left: Content */}
           <AnimatedSection animation="slideRight">
             <div className="flex items-center gap-3 mb-6">
@@ -34,18 +42,16 @@ export function UeberUnsSnippet() {
 
             <div className="space-y-5 text-sm text-white/55 leading-relaxed font-light max-w-lg">
               <p>
-                Plumbary GmbH ist ein spezialisierter Hersteller von
-                Bleiprodukten für medizinische und industrielle Anwendungen.
-                Mit tiefem Werkstoffwissen und modernen Fertigungsverfahren
-                entwickeln und produzieren wir Lösungen, die höchsten
-                Anforderungen an Präzision, Qualität und Normkonformität
-                gerecht werden.
+                Plumbary GmbH wird als produktionsorientierte Bleigießerei
+                aufgebaut: Produkte, Fertigungsmöglichkeiten und
+                Zertifizierungen stehen im Mittelpunkt. Medizinische und
+                industrielle Produktlinien werden bewusst getrennt geführt.
               </p>
               <p>
-                Von der ersten Beratung über die konstruktive Auslegung bis zur
-                termingerechten Lieferung — wir begleiten unsere Kunden durch
-                den gesamten Prozess und stehen für zuverlässige Partnerschaft
-                auf Augenhöhe.
+                Die Website ist so vorbereitet, dass später konkrete
+                Produktdaten, Produktbilder, technische Datenblätter und
+                Zertifikate ergänzt werden können, ohne die Grundstruktur neu
+                aufzubauen.
               </p>
             </div>
 
@@ -60,40 +66,41 @@ export function UeberUnsSnippet() {
             </div>
           </AnimatedSection>
 
-          {/* Right: Photo */}
+          {/* Right: Capabilities matrix */}
           <AnimatedSection animation="slideLeft" delay={0.15}>
-            <div className="relative">
-              {/* Main image */}
-              <div className="relative overflow-hidden aspect-[4/3]">
-                <Image
-                  src="/images/factory-workers.png"
-                  alt="Gießereifachleute beim Metallguss in der Plumbary Produktion"
-                  fill
-                  className="object-cover object-center"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                {/* Subtle vignette */}
-                <div className="absolute inset-0 bg-gradient-to-br from-black/10 to-black/30" />
-
-                {/* Caption overlay – bottom left */}
-                <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/70 to-transparent">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/60">
-                    Produktion · Bleigießerei
-                  </p>
+            <div className="relative border border-white/[0.07] bg-[var(--color-dark-card)] p-6 lg:p-8">
+              <div
+                className="absolute inset-0 opacity-[0.035]"
+                style={{
+                  backgroundImage: `
+                    linear-gradient(to right, #8fafc4 1px, transparent 1px),
+                    linear-gradient(to bottom, #8fafc4 1px, transparent 1px)
+                  `,
+                  backgroundSize: "40px 40px",
+                }}
+              />
+              <div className="relative mb-8 flex items-end justify-between gap-6 border-b border-white/[0.07] pb-6">
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--color-secondary)]/70">
+                    Produktionsmatrix
+                  </div>
+                  <h3 className="mt-2 font-heading text-3xl font-bold uppercase leading-none text-white">
+                    Capabilities
+                  </h3>
                 </div>
+                <span className="font-heading text-7xl font-black leading-none text-white/[0.04]">
+                  Pb
+                </span>
               </div>
-
-              {/* Offset accent frame */}
-              <div className="absolute -bottom-3 -right-3 inset-0 border border-[var(--color-secondary)]/15 -z-10 pointer-events-none" />
-
-              {/* Stat badge – overlapping corner */}
-              <div className="absolute -bottom-5 -left-5 border border-[var(--color-secondary)]/25 bg-[var(--color-dark-card)] px-5 py-4 hidden sm:block">
-                <div className="font-heading text-3xl font-bold text-white leading-none">
-                  100%
-                </div>
-                <div className="text-[9px] font-bold uppercase tracking-[0.25em] text-[var(--color-secondary)]/70 mt-1">
-                  Made in Germany
-                </div>
+              <div className="relative grid gap-px bg-white/[0.06] sm:grid-cols-2">
+                {capabilities.map((item) => (
+                  <div key={item} className="bg-[var(--color-dark-card)] p-5">
+                    <div className="mb-3 h-px w-8 bg-[var(--color-secondary)]/45" />
+                    <p className="text-sm font-semibold uppercase tracking-[0.08em] text-white/72">
+                      {item}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </AnimatedSection>

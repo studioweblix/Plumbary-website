@@ -65,21 +65,21 @@ function PbMark({
       className={`select-none block overflow-visible ${className ?? ""}`}
     >
       <defs>
-        {/* ── Chrome metallic: dark → flare → mid → shadow → highlight × 2 ── */}
+        {/* ── Gunmetal metallic: close to the reference logo, less blue/chrome ── */}
         <linearGradient
           id={mId}
           x1="0" y1="0" x2="130" y2="100"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0%"   stopColor="#2a3e52" />
-          <stop offset="7%"   stopColor="#eef8ff" />   {/* sharp flare */}
-          <stop offset="17%"  stopColor="#88b2c6" />
-          <stop offset="28%"  stopColor="#3a5268" />
-          <stop offset="42%"  stopColor="#c8e2f2" />   {/* secondary highlight */}
-          <stop offset="54%"  stopColor="#587898" />
-          <stop offset="67%"  stopColor="#283c50" />
-          <stop offset="82%"  stopColor="#7898b0" />   {/* edge catchlight */}
-          <stop offset="100%" stopColor="#182838" />
+          <stop offset="0%"   stopColor="#151a20" />
+          <stop offset="8%"   stopColor="#858d95" />   {/* soft brushed highlight */}
+          <stop offset="18%"  stopColor="#3f464e" />
+          <stop offset="31%"  stopColor="#20262d" />
+          <stop offset="45%"  stopColor="#9ca3aa" />   {/* main metal sheen */}
+          <stop offset="56%"  stopColor="#545b63" />
+          <stop offset="70%"  stopColor="#242a31" />
+          <stop offset="84%"  stopColor="#6c747c" />   {/* bevel catchlight */}
+          <stop offset="100%" stopColor="#11161c" />
         </linearGradient>
 
         {/* ── Specular top-left highlight ─────────────────────────────────── */}
@@ -88,14 +88,14 @@ function PbMark({
           x1="0" y1="0" x2="130" y2="100"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0%"  stopColor="#ffffff" stopOpacity="0.28" />
-          <stop offset="30%" stopColor="#ffffff" stopOpacity="0.05" />
+          <stop offset="0%"  stopColor="#f4f6f8" stopOpacity="0.22" />
+          <stop offset="30%" stopColor="#d5d9dd" stopOpacity="0.06" />
           <stop offset="55%" stopColor="#ffffff" stopOpacity="0"    />
         </linearGradient>
 
         {/* ── Drop shadow ─────────────────────────────────────────────────── */}
         <filter id={fId} x="-30%" y="-30%" width="160%" height="160%">
-          <feDropShadow dx="2" dy="3" stdDeviation="4" floodColor="#010608" floodOpacity="0.85" />
+          <feDropShadow dx="2" dy="3" stdDeviation="4" floodColor="#05070a" floodOpacity="0.82" />
         </filter>
       </defs>
 

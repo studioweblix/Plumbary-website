@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 
 // ── Animation variants ──────────────────────────────────────────
 const container: Variants = {
@@ -30,34 +29,27 @@ const expandLine: Variants = {
 export function PlumbaryHero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-[#060d18]">
-
-      {/* ── Background image ─────────────────────────────────────── */}
       <div className="absolute inset-0">
-        <Image
-          src="/images/hero-bg.png"
-          alt="Industrielle Fertigungsanlage"
-          fill
-          priority
-          quality={100}
-          className="object-cover"
-          style={{ objectPosition: "60% center" }}
-          sizes="100vw"
-        />
-        {/* Links stark abdunkeln (helles Fabrikbild), rechts leicht durchscheinen lassen */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#030a12]/97 via-[#040c18]/92 to-[#030a12]/65" />
-        {/* Top nav cover */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030a12]/80 via-[#030a12]/20 to-transparent" />
-        {/* Bottom fade to page background */}
-        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#060d18] to-transparent" />
-        {/* Subtle grain overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_24%,rgba(143,175,196,0.10),transparent_32%),linear-gradient(135deg,#030912_0%,#08131f_48%,#030912_100%)]" />
         <div
-          className="absolute inset-0 opacity-[0.03] mix-blend-overlay"
+          className="absolute inset-0 opacity-[0.055]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #8fafc4 1px, transparent 1px),
+              linear-gradient(to bottom, #8fafc4 1px, transparent 1px)
+            `,
+            backgroundSize: "72px 72px",
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.035]"
           style={{
             backgroundImage:
               "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
             backgroundSize: "128px 128px",
           }}
         />
+        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#060d18] to-transparent" />
       </div>
 
       {/* ── Ghost "82" – atomic number of lead, decorative ─────────── */}
@@ -107,7 +99,7 @@ export function PlumbaryHero() {
           variants={container}
           initial="hidden"
           animate="show"
-          className="max-w-[740px]"
+          className="mx-auto max-w-[900px] text-center"
         >
           {/* Kicker */}
           <motion.div variants={fadeUp} className="mb-4">
@@ -115,7 +107,7 @@ export function PlumbaryHero() {
               className="font-body font-semibold uppercase text-[var(--color-secondary)]/60"
               style={{ fontSize: "clamp(0.8rem, 1.4vw, 1.1rem)", letterSpacing: "0.32em" }}
             >
-              Bleigießerei
+          Produktionsbetrieb · Bleigießerei
             </span>
           </motion.div>
 
@@ -129,14 +121,14 @@ export function PlumbaryHero() {
                 letterSpacing: "-0.025em",
               }}
             >
-              PLUMBARY
+              PLUMBARY GmbH
             </span>
           </motion.h1>
 
           {/* Gradient rule */}
-          <motion.div variants={expandLine} className="my-5 origin-left">
+          <motion.div variants={expandLine} className="my-5 origin-center">
             <div
-              className="h-px"
+              className="mx-auto h-px"
               style={{
                 width: "clamp(180px, 36vw, 520px)",
                 background:
@@ -146,17 +138,7 @@ export function PlumbaryHero() {
           </motion.div>
 
           {/* GmbH sub-line */}
-          <motion.div variants={fadeUp} className="mb-10 flex items-center gap-3">
-            <span
-              className="font-heading font-semibold uppercase text-[var(--color-secondary)]/55"
-              style={{
-                fontSize: "clamp(0.7rem, 1.4vw, 1.3rem)",
-                letterSpacing: "0.46em",
-              }}
-            >
-              GmbH
-            </span>
-            <span className="text-[var(--color-secondary)]/20 text-sm">·</span>
+          <motion.div variants={fadeUp} className="mb-10 flex flex-wrap items-center justify-center gap-3">
             <span
               className="font-body font-medium uppercase text-white/22"
               style={{
@@ -164,29 +146,38 @@ export function PlumbaryHero() {
                 letterSpacing: "0.28em",
               }}
             >
-              Präzisionsguss seit über 60 Jahren
+              Medizinische und industrielle Bleiprodukte
             </span>
           </motion.div>
 
-          {/* Description */}
+          <motion.p
+            variants={fadeUp}
+            className="mx-auto mb-10 max-w-2xl text-sm font-light leading-relaxed text-white/52 sm:text-base"
+          >
+            Strukturierte B2B-Produktion für Bleikomponenten: klare Trennung
+            zwischen medizinischen Strahlenschutzprodukten und industriellen
+            Anwendungen, mit Fokus auf Produktportfolio, Qualität und
+            Zertifizierungen.
+          </motion.p>
+
           {/* CTAs */}
           <motion.div
             variants={fadeUp}
-            className="flex flex-wrap items-center gap-3.5"
+            className="flex flex-wrap items-center justify-center gap-3.5"
           >
             <Link
-              href="/produkte"
+              href="/produkte#medizin"
               className="group inline-flex items-center gap-2.5 bg-[var(--color-secondary)] px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#040b14] transition-all duration-300 hover:bg-white"
             >
-              Produkte entdecken
+              Medizinische Produkte
               <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
 
             <Link
-              href="/kontakt"
+              href="/produkte#industrie"
               className="inline-flex items-center gap-2.5 border border-white/18 px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55 transition-all duration-300 hover:border-white/35 hover:text-white"
             >
-              Anfrage stellen
+              Industrielle Produkte
             </Link>
           </motion.div>
         </motion.div>
@@ -196,13 +187,13 @@ export function PlumbaryHero() {
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          className="mt-20 flex flex-wrap gap-x-12 gap-y-4 border-t border-white/[0.06] pt-8"
+          className="mx-auto mt-20 flex max-w-5xl flex-wrap justify-center gap-x-12 gap-y-4 border-t border-white/[0.06] pt-8"
         >
           {[
-            { value: "60+", label: "Jahre Erfahrung" },
-            { value: "2", label: "Produktbereiche" },
-            { value: "DIN", label: "ISO & Normen" },
-            { value: "100%", label: "Made in Germany" },
+            { value: "B2B", label: "Produktionsbetrieb" },
+            { value: "2", label: "Getrennte Märkte" },
+            { value: "ISO", label: "Zertifikate vorbereitet" },
+            { value: "Pb", label: "Werkstoff-Fokus" },
           ].map(({ value, label }) => (
             <div key={label} className="flex items-baseline gap-2">
               <span
@@ -222,21 +213,12 @@ export function PlumbaryHero() {
         </motion.div>
       </div>
 
-      {/* ── Scroll hint ──────────────────────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0, y: -8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.6, duration: 0.8 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/20"
-        aria-hidden
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-        >
-          <ChevronDown className="h-5 w-5" />
-        </motion.div>
-      </motion.div>
+      <div className="absolute right-8 bottom-10 hidden items-center gap-3 text-white/20 lg:flex">
+        <ShieldCheck className="h-4 w-4 text-[var(--color-secondary)]/45" />
+        <span className="text-[10px] font-bold uppercase tracking-[0.25em]">
+          Produkte · Qualität · Zertifikate
+        </span>
+      </div>
 
       {/* ── Diagonal bottom edge ─────────────────────────────────── */}
       <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: 80 }}>

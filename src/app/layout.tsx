@@ -19,13 +19,13 @@ const barlow = Barlow({
 });
 
 export const metadata: Metadata = {
-  title: "Plumbary GmbH – Bleigießerei",
+  title: "Plumbary GmbH – Bleigießerei & Blei-Produktion",
   description:
-    "Plumbary GmbH – Hersteller von medizinischen und industriellen Bleiprodukten. Präzision, Qualität und Werkstoffkompetenz seit Grund auf.",
+    "Plumbary GmbH – produktionsorientierte Bleigießerei für medizinische und industrielle Bleiprodukte, mit Fokus auf Produktportfolio, Qualität und Zertifizierungen.",
   openGraph: {
-    title: "Plumbary GmbH – Bleigießerei",
+    title: "Plumbary GmbH – Bleigießerei & Blei-Produktion",
     description:
-      "Präzisionsgefertigte Bleiprodukte für medizinische und industrielle Anwendungen.",
+      "Medizinische und industrielle Bleiprodukte klar getrennt, produktorientiert und zertifizierungsbereit dargestellt.",
     type: "website",
   },
 };
